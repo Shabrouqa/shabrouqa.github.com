@@ -1,96 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shabrouqa</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Website</title>
+<!-- Bootstrap CSS -->
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+<!-- Font Awesome CSS -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css'>
 
-    <!-- Bootstrap CSS (not included in your example, assumed to be included elsewhere) -->
+<style>
+    .center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 60vh;
+        flex-direction: column; /* Make buttons appear vertically */
+        gap: 50px; /* Add some space between buttons */
+    }
 
-    <style>
-        .center {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 60vh;
-            flex-direction: column; /* Make buttons appear vertically */
-            gap: 50px; /* Add some space between buttons */
-        }
-
-        .btn-custom {
-            width: 200px; /* Fixed width for all buttons */
-            height: 75px; /* Fixed height for all buttons */
-            font-size: 20px; /* Font size */
-        }
-    </style>
+    .btn-custom {
+        width: 200px; /* Fixed width for all buttons */
+        height: 75px; /* Fixed height for all buttons */
+        font-size: 20px; /* Font size */
+    }
+</style>
 </head>
 <body>
 
-    
 <div class="center">
-    <!-- Three buttons with unique text and onclick events -->
-    <button type="button" class="btn btn-primary btn-custom" onclick="hitWebsite('sgp1', 'v1=1', this)">Big Door</button>
-    <button type="button" class="btn btn-primary btn-custom" onclick="hitWebsite('sgp1', 'v1=3', this)">Small Door</button>
-    <button type="button" class="btn btn-primary btn-custom" onclick="hitWebsite('sgp1', 'v1=2', this)">Outdoor Gate</button>
-    <p id="result"></p>
+    <button type="button" class="btn btn-primary btn-custom" onclick="hitWebsite('https://sgp1.blynk.cloud/external/api/update?token=N5Ra0zsS6__J5zkjuf0pljWaBH0ZGb10&v1=1', this)">Big Door</button>
+    <button type="button" class="btn btn-primary btn-custom" onclick="hitWebsite('https://sgp1.blynk.cloud/external/api/update?token=N5Ra0zsS6__J5zkjuf0pljWaBH0ZGb10&v1=3', this)">Small Door</button>
+    <button type="button" class="btn btn-primary btn-custom" onclick="hitWebsite('https://sgp1.blynk.cloud/external/api/update?token=N5Ra0zsS6__J5zkjuf0pljWaBH0ZGb10&v1=2', this)">Outdoor Gate</button>
 </div>
 
-<!-- jQuery (required for Bootstrap JS components) -->
+<!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<!-- Bootstrap JS (assuming version 3.x based on your script inclusion) -->
+<!-- Bootstrap JS -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js'></script>
-
 <script>
-    var server = "sgp1";
-    var authToken = "N5Ra0zsS6__J5zkjuf0pljWaBH0ZGb10";
+function hitWebsite(url, button) {
+    var $button = $(button);
+    $button.button('loading');
 
-
-
-function checkLink() {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4) {
-            if (this.status == 200) {
-                if (this.responseText === "true") {
-                    document.getElementById("result").innerText = "Device is connected.";
-                } else {
-                    document.getElementById("result").innerText = "Device is not connected.";
-                }
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            $button.button('reset');
+            if (xhr.status === 200) {
+                console.log(xhr.responseText); // Response from the website
             } else {
-                document.getElementById("result").innerText = "Error: Unable to connect to the device.";
+                console.error("Error:", xhr.status);
             }
         }
     };
-    // Use the token variable here
-    xhttp.open("GET", "https://"+server+".blynk.cloud/external/api/isHardwareConnected?token=" + authToken, true);
-    xhttp.send();
+    xhr.send();
 }
-
-setInterval(checkLink, 150);
-
-
-    // JavaScript function to handle AJAX request on button click
-    function hitWebsite(serverName, apiEndpoint, button) {
-        var $button = $(button); // Convert native button to jQuery object
-        $button.button('loading'); // Change button state to 'loading'
-
-        var url = `https://${serverName}.blynk.cloud/external/api/update?token=${authToken}&${apiEndpoint}`; // Construct URL with server, token, and endpoint
-        var xhr = new XMLHttpRequest(); // Create a new XMLHttpRequest object
-        xhr.open("GET", url, true); // Initialize a GET request to the specified URL
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) { // When the request is complete
-                $button.button('reset'); // Reset button state
-
-                if (xhr.status === 200) {
-                    console.log(xhr.responseText); // Log the response from the server
-                } else {
-                    console.error("Error:", xhr.status); // Log any error status
-                }
-            }
-        };
-        xhr.send(); // Send the request
-    }
 </script>
-
 </body>
 </html>
