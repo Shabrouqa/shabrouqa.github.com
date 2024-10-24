@@ -15,7 +15,9 @@
 var server = "sgp1";
 var token = localStorage.getItem("token") || "";
 if (token ==""){ token = "oFx_9fHxjhrxWbEpmAhzy3fTSquschga";
-			     localStorage.setItem("token", token);}
+			     localStorage.setItem("token", token);
+                 localStorage.setItem("gridStyle", "grid1");
+                 }
 
 
 function checkLink() {
@@ -373,7 +375,6 @@ function toggleGridStyle() {
         ledContainer.style.gridTemplateColumns = 'repeat(1, 1fr)';
         ledContainer.style.display= "inline-grid";
         ledContainer.style.gap= "35px";
-        
         isGridThreeColumns = false;    }
         else {
         ledContainer.style.gridTemplateColumns = 'repeat(3, 1fr)';
