@@ -110,12 +110,18 @@ function displayValue() {
     xhttp.send();}
 </script>
 
+
 <script>
 function showButtons(arraySize) {
     var lastGridStyle = localStorage.getItem('gridStyle');
+    var ledContainer = document.querySelector('.led-container');
     for (var i = 1; i <= arraySize; i++) {
         document.getElementById("led" + i).style.display = "inline-block";    
          if (lastGridStyle === 'grid1') {
+         
+         ledContainer.style.gridTemplateColumns = 'repeat(1, 1fr)';
+         ledContainer.style.display= "inline-grid";
+         
          document.getElementById("led" + i).style.backgroundColor = "SteelBlue";
          document.getElementById("led" + i).style.fontSize = "19px";
          document.getElementById("led" + i).style.width = "225px";
