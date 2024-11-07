@@ -14,7 +14,12 @@
 <script>
 var server = "sgp1";
 var token = localStorage.getItem("token\2") || "";
+if (token ==""){ token = "pzuG_dvON6Xy0nYO5PCpaCwwVOQzoagb";
+			     localStorage.setItem("token", token);
+                 localStorage.setItem("gridStyle", "grid1");
+                 }
 
+	
 function checkLink() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
