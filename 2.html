@@ -6,19 +6,14 @@
 <title>ESP Web Server</title>
 <style>
     body { text-align: center; }
-    .led-container { max-width: auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; justify-content: center; }
-    .led-button { color: white; font-weight: bold; padding: 17px; box-sizing: border-box; display: none; max-width: auto; background-color: green; border-radius: 0px;}
-    #value { display: none; }
+    .led-container { max-width: auto; display: grid; margin: auto; grid-template-columns: repeat(3, 1fr); gap: 25px; justify-content: center; }
+    .led-button { color: white; font-weight: bold; white-space: normal; font-size: 17px; word-wrap:anywhere; padding: 17px; box-sizing: border-box; display: none; max-width: auto; background-color: green; border-radius: 0px;}
+    #value { display: none; }.
 </style>
 
 <script>
 var server = "sgp1";
-var token = localStorage.getItem("token") || "";
-if (token ==""){ token = "pzuG_dvON6Xy0nYO5PCpaCwwVOQzoagb";
-			     localStorage.setItem("token", token);
-                 localStorage.setItem("gridStyle", "grid1");
-                 }
-
+var token = localStorage.getItem("token\2") || "";
 
 function checkLink() {
     var xhttp = new XMLHttpRequest();
@@ -34,7 +29,7 @@ function checkLink() {
 <script>
 function hitWebsite(value,buttonId) {
     var url = "https://"+server+".blynk.cloud/external/api/update?token=" + token + "&v1=" + value;
-    var lastGridStyle = localStorage.getItem('gridStyle');
+    var lastGridStyle = localStorage.getItem('gridStyle2');
     var button = document.getElementById(buttonId);
     button.innerText = "Loading...";
     if (lastGridStyle === 'grid1') {button.style.backgroundColor = "DarkBlue";}
@@ -70,7 +65,7 @@ function displayValue() {
                     var digit = this.responseText.charAt(i);
                     var buttonId = "led" + (i + 1);
                     var button = document.getElementById(buttonId);
-    				var lastGridStyle = localStorage.getItem('gridStyle');
+    				var lastGridStyle = localStorage.getItem('gridStyle\2');
                     var ledContainer = document.querySelector('.led-container');
     				
    			 if (lastGridStyle === 'grid1') {
@@ -104,24 +99,18 @@ function displayValue() {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var arraySize = parseInt(this.responseText);
-            localStorage.setItem('arraySize', arraySize);
+            localStorage.setItem('arraySize', arraySize\2);
             showButtons(arraySize);}};
     xhttp.open("GET", "https://"+server+".blynk.cloud/external/api/get?token=" + token + "&v2", true);
     xhttp.send();}
 </script>
 
-
 <script>
 function showButtons(arraySize) {
-    var lastGridStyle = localStorage.getItem('gridStyle');
-    var ledContainer = document.querySelector('.led-container');
+    var lastGridStyle = localStorage.getItem('gridStyle\2');
     for (var i = 1; i <= arraySize; i++) {
         document.getElementById("led" + i).style.display = "inline-block";    
          if (lastGridStyle === 'grid1') {
-         
-         ledContainer.style.gridTemplateColumns = 'repeat(1, 1fr)';
-         ledContainer.style.display= "inline-grid";
-         
          document.getElementById("led" + i).style.backgroundColor = "SteelBlue";
          document.getElementById("led" + i).style.fontSize = "19px";
          document.getElementById("led" + i).style.width = "225px";
@@ -134,7 +123,7 @@ function showButtons(arraySize) {
 
 <script>
 function setToken() {
-    var newToken = prompt("Enter new token :", token);
+    var newToken = prompt("Enter new token :", token\2);
     if (newToken !== null && newToken.length <= 32) {
     token = newToken;
     localStorage.setItem("token", token);
@@ -153,7 +142,7 @@ function SitSwitch1() {
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     var responseText = this.responseText;
-                    localStorage.setItem("Switch1", responseText);
+                    localStorage.setItem("Switch1\2", responseText);
                     NameSwitch1(responseText);
                 }};
             xhttp.open("GET", "https://"+server+".blynk.cloud/external/api/get?token=" + token + "&v4", true);
@@ -166,7 +155,7 @@ function SitSwitch2() {
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     var responseText = this.responseText;
-                    localStorage.setItem("Switch2", responseText);
+                    localStorage.setItem("Switch2\2", responseText);
                     NameSwitch2(responseText);
                     }};
             xhttp.open("GET", "https://"+server+".blynk.cloud/external/api/get?token=" + token + "&v5", true);
@@ -357,13 +346,13 @@ function NameSwitch2(value){
     var ledContainer = document.querySelector('.led-container');
     var isGridThreeColumns = true;
     
-    var savedArraySize = localStorage.getItem('arraySize');
+    var savedArraySize = localStorage.getItem('arraySize\2');
     if (savedArraySize) { showButtons(parseInt(savedArraySize));}
     
-    var saveSwitch1 = localStorage.getItem('Switch1');
+    var saveSwitch1 = localStorage.getItem('Switch1\2');
     if (saveSwitch1 != "") { NameSwitch1(saveSwitch1);}
     
-    var saveSwitch2 = localStorage.getItem('Switch2');
+    var saveSwitch2 = localStorage.getItem('Switch2\2');
     if (saveSwitch2 != "") { NameSwitch2(saveSwitch2);}
 
 
@@ -381,6 +370,7 @@ function toggleGridStyle() {
         ledContainer.style.gridTemplateColumns = 'repeat(1, 1fr)';
         ledContainer.style.display= "inline-grid";
         ledContainer.style.gap= "35px";
+        
         isGridThreeColumns = false;    }
         else {
         ledContainer.style.gridTemplateColumns = 'repeat(3, 1fr)';
@@ -454,7 +444,6 @@ function toggleGridStyle() {
     <br><br>
     <button id="changeStyleButton">Change Style</button>
     <p id="value"></p>
-    <br><br>
-    <p>Home Page: <a href="/index.html">Click Here</a></p>
+
 </body>
 </html>
