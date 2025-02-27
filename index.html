@@ -11,6 +11,67 @@
     #value { display: none; }
 </style>
 
+
+<style>
+#snackbar-container {
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  z-index: 1;
+}
+
+.snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 20px;
+  padding: 16px;
+  font-size: 17px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 1.0s;
+  animation: fadein 0.5s, fadeout 0.5s 1.0s;
+  }
+
+@-webkit-keyframes fadein {  from {bottom: 0; opacity: 0;}   to {bottom: 0; opacity: 1;}}
+@keyframes fadein {  from {bottom: 0; opacity: 0;}  to {bottom: 0; opacity: 1;}}
+@-webkit-keyframes fadeout {  from {bottom: 0; opacity: 1;}   to {bottom: 0; opacity: 0;}}
+@keyframes fadeout {  from {bottom: 0; opacity: 1;}  to {bottom: 0; opacity: 0;}}
+</style>
+
+<script>
+function popup() {
+  // Create a new snackbar element
+  var snackbar = document.createElement("div");
+  snackbar.className = "snackbar";
+  snackbar.innerText = "Command Sent Successfully";
+
+  // Append the snackbar to the container
+  var container = document.getElementById("snackbar-container");
+  container.appendChild(snackbar);
+
+  // Show the snackbar with animation
+  setTimeout(function() {
+    snackbar.className = "snackbar show";
+  }, 10); // Slight delay to trigger the animation
+  
+  // Hide the snackbar after 3 seconds
+  setTimeout(function() {
+    snackbar.className = "snackbar";
+    container.removeChild(snackbar);
+  }, 1500); // 3500ms to match the fade-out timing
+}
+</script>
+
+
+	
 <script>
 var server = "sgp1";
 var token = localStorage.getItem("token") || "";
@@ -47,6 +108,7 @@ function hitWebsite(value,buttonId) {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
         button.disabled = false;
+	popup();
     if (lastGridStyle === 'grid1') {button.style.backgroundColor = "SteelBlue";}
         else {
          if (button.style.backgroundColor === "darkred"){ button.style.backgroundColor = "green";}
@@ -449,6 +511,7 @@ function toggleGridStyle() {
         
     </div>
     <br><br><br><br>
+    <div id="snackbar-container"></div>
     
     <button onclick="setToken()">Set Token</button>
     <br><br>
