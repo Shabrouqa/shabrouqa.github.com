@@ -19,7 +19,7 @@ https://playlist.fasttvcdn.com/pl/toa2uuhhygheuly7xtuqrg/roya-kitchen/playlist.m
 #EXTINF:-1 tvg-id="AlMamlakaTV.jo" tvg-logo="https://i.imgur.com/UeTseMV.png" group-title="News",Al Mamlaka TV (1080p)
 https://bcovlive-a.akamaihd.net/4109c7ba30fd4a44ad9afe917c67a8c8/eu-central-1/6415809151001/playlist.m3u8
 
-#EXTINF:-1 tvg-id="" tvg-logo="https://statres.cdn.mgmlcdn.com/analytics/uploads/164/5ff6eb7f11.png" ,National Geographic Abu Dhabi
+#EXTINF:-1 tvg-id="National Geographic Abu Dhabi" tvg-logo="https://statres.cdn.mgmlcdn.com/analytics/uploads/164/5ff6eb7f11.png" group-title="Documentary" ,National Geographic Abu Dhabi
 https://admn-live-cdn-lb.starzplayarabia.com/out/v1/admn_tv_enc/national_geo/national_geo_hls_nd/index.m3u8
 
 #EXTINF:-1 tvg-id="RTArabic.ru" tvg-logo="https://i.imgur.com/G8vGrn1.png" group-title="News",RT Arabic (1080p) [Geo-blocked]
@@ -196,6 +196,7 @@ https://cityeden.catcast.tv/content/38354/index.m3u8
 
 #EXTINF:-1 tvg-id="AbazaTV.ru" tvg-logo="https://i.imgur.com/7Jo7UAf.png" group-title="General",Abaza TV
 https://public.apsny.camera/tv_abaza_tv_to_site/index.m3u8
+
 
 
 
